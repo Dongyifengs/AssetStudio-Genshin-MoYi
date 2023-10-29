@@ -71,11 +71,11 @@
             toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             filterTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             debugMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -406,21 +406,21 @@
             // toolStripMenuItem4
             // 
             toolStripMenuItem4.Name = "toolStripMenuItem4";
-            toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            toolStripMenuItem4.Size = new System.Drawing.Size(148, 22);
             toolStripMenuItem4.Text = "所有资源";
             toolStripMenuItem4.Click += toolStripMenuItem4_Click;
             // 
             // toolStripMenuItem5
             // 
             toolStripMenuItem5.Name = "toolStripMenuItem5";
-            toolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
+            toolStripMenuItem5.Size = new System.Drawing.Size(148, 22);
             toolStripMenuItem5.Text = "被选择的资源";
             toolStripMenuItem5.Click += toolStripMenuItem5_Click;
             // 
             // toolStripMenuItem6
             // 
             toolStripMenuItem6.Name = "toolStripMenuItem6";
-            toolStripMenuItem6.Size = new System.Drawing.Size(180, 22);
+            toolStripMenuItem6.Size = new System.Drawing.Size(148, 22);
             toolStripMenuItem6.Text = "被筛选的资源";
             toolStripMenuItem6.Click += toolStripMenuItem6_Click;
             // 
@@ -435,28 +435,23 @@
             // toolStripMenuItem7
             // 
             toolStripMenuItem7.Name = "toolStripMenuItem7";
-            toolStripMenuItem7.Size = new System.Drawing.Size(180, 22);
+            toolStripMenuItem7.Size = new System.Drawing.Size(148, 22);
             toolStripMenuItem7.Text = "所有资源";
             toolStripMenuItem7.Click += toolStripMenuItem7_Click;
             // 
             // toolStripMenuItem8
             // 
             toolStripMenuItem8.Name = "toolStripMenuItem8";
-            toolStripMenuItem8.Size = new System.Drawing.Size(180, 22);
+            toolStripMenuItem8.Size = new System.Drawing.Size(148, 22);
             toolStripMenuItem8.Text = "被选择的资源";
             toolStripMenuItem8.Click += toolStripMenuItem8_Click;
             // 
             // toolStripMenuItem9
             // 
             toolStripMenuItem9.Name = "toolStripMenuItem9";
-            toolStripMenuItem9.Size = new System.Drawing.Size(180, 22);
+            toolStripMenuItem9.Size = new System.Drawing.Size(148, 22);
             toolStripMenuItem9.Text = "被筛选的资源";
             toolStripMenuItem9.Click += toolStripMenuItem9_Click;
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(183, 6);
             // 
             // toolStripMenuItem10
             // 
@@ -485,6 +480,11 @@
             toolStripMenuItem13.Size = new System.Drawing.Size(148, 22);
             toolStripMenuItem13.Text = "被筛选的资源";
             toolStripMenuItem13.Click += toolStripMenuItem13_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new System.Drawing.Size(183, 6);
             // 
             // filterTypeToolStripMenuItem
             // 
@@ -516,14 +516,14 @@
             toolStripMenuItem15.CheckOnClick = true;
             toolStripMenuItem15.CheckState = System.Windows.Forms.CheckState.Checked;
             toolStripMenuItem15.Name = "toolStripMenuItem15";
-            toolStripMenuItem15.Size = new System.Drawing.Size(172, 22);
+            toolStripMenuItem15.Size = new System.Drawing.Size(180, 22);
             toolStripMenuItem15.Text = "显示错误信息";
             toolStripMenuItem15.Click += toolStripMenuItem15_Click;
             // 
             // exportClassStructuresMenuItem
             // 
             exportClassStructuresMenuItem.Name = "exportClassStructuresMenuItem";
-            exportClassStructuresMenuItem.Size = new System.Drawing.Size(172, 22);
+            exportClassStructuresMenuItem.Size = new System.Drawing.Size(180, 22);
             exportClassStructuresMenuItem.Text = "导出类结构";
             exportClassStructuresMenuItem.Click += exportClassStructuresMenuItem_Click;
             // 
@@ -533,16 +533,17 @@
             console.CheckOnClick = true;
             console.CheckState = System.Windows.Forms.CheckState.Checked;
             console.Name = "console";
-            console.Size = new System.Drawing.Size(172, 22);
+            console.Size = new System.Drawing.Size(180, 22);
             console.Text = "启用控制台";
             console.ToolTipText = "Check this option to log all events on a debug console.";
             console.CheckedChanged += console_CheckedChanged;
+            console.Click += console_Click;
             // 
             // enableFileLogging
             // 
             enableFileLogging.CheckOnClick = true;
             enableFileLogging.Name = "enableFileLogging";
-            enableFileLogging.Size = new System.Drawing.Size(172, 22);
+            enableFileLogging.Size = new System.Drawing.Size(180, 22);
             enableFileLogging.Text = "启用文件日志记录";
             enableFileLogging.CheckedChanged += enableFileLogging_CheckedChanged;
             // 
@@ -1108,6 +1109,7 @@
             Name = "AssetStudioGUIForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "AssetStudioGUI";
+            Load += AssetStudioGUIForm_Load_1;
             DragDrop += AssetStudioGUIForm_DragDrop;
             DragEnter += AssetStudioGUIForm_DragEnter;
             KeyDown += AssetStudioForm_KeyDown;

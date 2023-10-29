@@ -5,9 +5,9 @@
 		<TargetFramework>net6.0-windows</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ApplicationIcon>Resources\as.ico</ApplicationIcon>
-		<Version>1.18.60</Version>
-		<AssemblyVersion>1.18.60</AssemblyVersion>
-		<FileVersion>1.18.60</FileVersion>
+		<Version>1.00.00</Version>
+		<AssemblyVersion>1.00.00</AssemblyVersion>
+		<FileVersion>1.00.00</FileVersion>
 		<Copyright>Copyright © Razmoth 2022; Copyright © Perfare 2018-2022; Copyright © MoYi </Copyright>
 		<DebugType>embedded</DebugType>
 	</PropertyGroup>

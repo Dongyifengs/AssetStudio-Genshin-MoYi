@@ -242,7 +242,7 @@ namespace AssetStudioGUI
         {
             if (assetsManager.assetsFileList.Count == 0)
             {
-                StatusStripUpdate("No Unity file can be loaded.");
+                StatusStripUpdate("无法加载Unity文件。");
                 return;
             }
 
@@ -251,11 +251,11 @@ namespace AssetStudioGUI
 
             if (!string.IsNullOrEmpty(productName))
             {
-                Text = $"Studio v{Application.ProductVersion} - {productName} - {Path.GetFileName(assetsManager.assetsFileList[0].originalPath)} - {assetsManager.assetsFileList[0].unityVersion} - {assetsManager.assetsFileList[0].m_TargetPlatform}";
+                Text = $"Studio v{Application.ProductVersion} - 游戏代号:{productName} - 文件:{Path.GetFileName(assetsManager.assetsFileList[0].originalPath)} - Unity版本:{assetsManager.assetsFileList[0].unityVersion} - MoYi中文限定版";
             }
             else
             {
-                Text = $"Studio v{Application.ProductVersion} - {Studio.Game.Name} - {Path.GetFileName(assetsManager.assetsFileList[0].originalPath)} - {assetsManager.assetsFileList[0].unityVersion} - {assetsManager.assetsFileList[0].m_TargetPlatform}";
+                Text = $"Studio v{Application.ProductVersion} - 游戏代号:{Studio.Game.Name} - 文件:{Path.GetFileName(assetsManager.assetsFileList[0].originalPath)} - Unity版本:{assetsManager.assetsFileList[0].unityVersion} - MoYi中文限定版";
             }
 
             assetListView.VirtualListSize = visibleAssets.Count;
@@ -2316,6 +2316,16 @@ namespace AssetStudioGUI
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AssetStudioGUIForm_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void console_Click(object sender, EventArgs e)
         {
 
         }

@@ -71,16 +71,16 @@ namespace AssetStudio
                         }
                     }
                 }
-                Logger.Info($"{game.Name}Map build successfully, {collisions} collisions found !!");
+                Logger.Info($"{game.Name} 地图构建成功，发现 {collisions}  冲突!!");
             }
             catch (Exception e)
             {
-                Logger.Warning($"{game.Name}Map was not build, {e.Message}");
+                Logger.Warning($"{game.Name}地图没有建立, {e.Message}");
             }
         }
         public static void LoadMap(Game game)
         {
-            Logger.Info($"Loading {game.Name}Map");
+            Logger.Info($"加载 {game.Name} 地图中");
             try
             {
                 CABMap.Clear();
