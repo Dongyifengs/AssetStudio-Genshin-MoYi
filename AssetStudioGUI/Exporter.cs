@@ -93,17 +93,31 @@ namespace AssetStudioGUI
 
         public static bool ExportMonoBehaviour(AssetItem item, string exportPath)
         {
-            if (!TryExportFile(exportPath, item, ".json", out var exportFullPath))
-                return false;
             var m_MonoBehaviour = (MonoBehaviour)item.Asset;
-            var type = m_MonoBehaviour.ToType();
-            if (type == null)
+            String name = m_MonoBehaviour.m_Name;
+            if (name.EndsWith("_Atlas"))
             {
-                var m_Type = Studio.MonoBehaviourToTypeTree(m_MonoBehaviour);
-                type = m_MonoBehaviour.ToType(m_Type);
+                if (!TryExportFile(exportPath, item, ".atlas", out var exportFullPath))
+                    return false;
+                String data = System.Text.Encoding.UTF8.GetString(m_MonoBehaviour.GetRawData());
+                String split_identify = name.Replace("_Atlas", ".png");
+                // TODO 使用FOR循环列表切片
+                String rawAtlasData = split_identify + data.Split(split_identify)[1];
+                File.WriteAllText(exportFullPath, rawAtlasData);
             }
-            var str = JsonConvert.SerializeObject(type, Formatting.Indented);
-            File.WriteAllText(exportFullPath, str);
+            else
+            {
+                if (!TryExportFile(exportPath, item, ".json", out var exportFullPath))
+                    return false;
+                var type = m_MonoBehaviour.ToType();
+                if (type == null)
+                {
+                    var m_Type = Studio.MonoBehaviourToTypeTree(m_MonoBehaviour);
+                    type = m_MonoBehaviour.ToType(m_Type);
+                }
+                var str = JsonConvert.SerializeObject(type, Formatting.Indented);
+                File.WriteAllText(exportFullPath, str);
+            }
             return true;
         }
 

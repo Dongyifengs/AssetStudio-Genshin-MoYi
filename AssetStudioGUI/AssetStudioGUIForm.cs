@@ -1029,13 +1029,22 @@ namespace AssetStudioGUI
 
         private void PreviewMonoBehaviour(MonoBehaviour m_MonoBehaviour)
         {
-            var obj = m_MonoBehaviour.ToType();
-            if (obj == null)
+            String str;
+            String name = m_MonoBehaviour.m_Name;
+            if (!name.EndsWith("Atlas"))
             {
-                var type = MonoBehaviourToTypeTree(m_MonoBehaviour);
-                obj = m_MonoBehaviour.ToType(type);
+                var obj = m_MonoBehaviour.ToType();
+                if (obj == null)
+                {
+                    var type = MonoBehaviourToTypeTree(m_MonoBehaviour);
+                    obj = m_MonoBehaviour.ToType(type);
+                }
+                str = JsonConvert.SerializeObject(obj, Formatting.Indented);
             }
-            var str = JsonConvert.SerializeObject(obj, Formatting.Indented);
+            else
+            {
+                str = "ATLAS资源暂时无法预览";
+            }
             PreviewText(str);
         }
 

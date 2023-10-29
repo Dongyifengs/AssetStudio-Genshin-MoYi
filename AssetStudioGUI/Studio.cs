@@ -976,8 +976,14 @@ namespace AssetStudioGUI
             var str = obj.Dump();
             if (str == null && obj is MonoBehaviour m_MonoBehaviour)
             {
-                var type = MonoBehaviourToTypeTree(m_MonoBehaviour);
-                str = m_MonoBehaviour.Dump(type);
+                if (m_MonoBehaviour.m_Name.EndsWith("_Atlas"))
+                {
+                    str = "ATLAS格式暂时无法Dump";
+                }
+                else {
+                    var type = MonoBehaviourToTypeTree(m_MonoBehaviour);
+                    str = m_MonoBehaviour.Dump(type);
+                }
             }
             return str;
         }
