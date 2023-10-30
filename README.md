@@ -50,8 +50,8 @@ ________________________________________________________________________________
 - Radioegor146: [Asset-indexes](https://github.com/radioegor146/gi-asset-indexes) 用于恢复/更新的 asset_index 文件。
 - Ds5678: [AssetRipper](https://github.com/AssetRipper/AssetRipper)[[discord](https://discord.gg/XqXa53W2Yh)] 用于关于资产格式和解析的信息。
 - mafaca: [uTinyRipper](https://github.com/mafaca/UtinyRipper) 用于 YAML 和 AnimationClipConverter。
-- [Studio](https:/Mgitlab.com/RazTools/Studio)基于本项目修改。
-- [Jaihk662](https://blog.csdn.net/Jaihk662/article/details/118193258)编译AssetStudio(原版)教程
+- RazTools:[Studo](https:/gitlab.com/RazTools/Studio)基于本项目修改。
+- Jaihk662：[CSDN](https://blog.csdn.net/Jaihk662/article/details/118193258)编译AssetStudio(原版)教程
 _____________________________________________________________________________________________________________________________
 
 如果您发现 AssetStudio-Genshin-MoYi 有用，您可以给它点星星 😄
