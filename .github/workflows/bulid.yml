@@ -1,43 +1,46 @@
-name: GitHub Actions Workflow
+name: CI Workflow
 
-on:
-  push:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+build:
+runs-on: windows-latest
+
+env:
+FBX_SDK: https://damassets.autodesk.net/content/dam/autodesk/www/adn/fbx/2020-3-2/fbx202032_fbxsdk_vs2019_win.exe
+File_NAME: Studio
+File_Format: zip
 
 steps:
-  - name: Checkout code
-    uses: actions/checkout@v2
+- name: Checkout code
+uses: actions/checkout@v2
+with:
+fetch-depth: 1
 
-  - name: Set up .NET
-    uses: actions/setup-dotnet@v1
-    with:
-    dotnet-version: 6.x
+- name: Cache dependencies
+uses: actions/cache@v2
+with:
+path: |
+%APPVEYOR_BUILD_FOLDER%\AssetStudioFBXNative\obj
+%LocalAppData%\NuGet\v3-cache
+key: cache-key
 
-  - name: Restore NuGet packages
-    run: |
-    nuget restore
+- name: Install FBX SDK
+run: |
+Invoke-WebRequest -Uri $env:FBX_SDK -OutFile fbx_sdk.exe
+Start-Process fbx_sdk.exe -ArgumentList "/S" -Wait
 
-  - name: Download FBX SDK
-    run: |
-    wget ${{ env.FBX_SDK }}
-    ./fbx*.exe /S # 这里使用 Linux 样式的命令，根据你的需求调整
+- name: Build the project
+run: |
+msbuild -m -t:AssetStudioGUI:publish -t:AssetStudioCLI:publish -r -p:Configuration=Release -v:minimal AssetStudio.sln
 
-  - name: Build and Publish
-    run: |
-    msbuild -m -t:AssetStudioGUI:publish -t:AssetStudioCLI:publish -r -p:Configuration=Release -v:minimal AssetStudio.sln
+- name: Archive artifacts
+run: |
+$env:TIME_STRING = (Get-Date -UFormat "%Y%m%d%H%M%S%a").ToString()
+7z a -y -mx9 %File_NAME%-%TIME_STRING%.%File_Format% %APPVEYOR_BUILD_FOLDER%\AssetStudioGUI\bin\Release\net6.0-windows\publish\
 
-  - name: Create Artifact
-    run: |
-    TIME_STRING=$(date -u +"%Y%m%d%H%M%S%a")
-    7z a -y -mx9 ${{ env.File_NAME }}-$TIME_STRING.${{ env.File_Format }} ${{ env.APPVEYOR_BUILD_FOLDER }}/AssetStudioGUI/bin/Release/net6.0-windows/publish/
-
-  - name: Upload Artifact
-    uses: actions/upload-artifact@v2
-    with:
-    name: ${{ env.File_NAME }}-$TIME_STRING.${{ env.File_Format }}
-    path: ./${{ env.File_NAME }}-$TIME_STRING.${{ env.File_Format }}
+- name: Upload artifacts
+uses: actions/upload-artifact@v2
+with:
+name: ${{ env.File_NAME }}-${{ env.TIME_STRING }}.${{ env.File_Format }}
+path: ${{ env.APPVEYOR_BUILD_FOLDER }}/${{ env.File_NAME }}-${{ env.TIME_STRING }}.${{ env.File_Format }}
