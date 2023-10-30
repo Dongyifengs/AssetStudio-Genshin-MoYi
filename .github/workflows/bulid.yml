@@ -1,45 +1,43 @@
 name: GitHub Actions Workflow
 
 on:
-push: # 当代码推送到 GitHub 时触发工作流
-branches:
-- main # 替换成你的默认分支
+  push:
+    branches:
+      - main
 
 jobs:
-build:
-runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
 steps:
-- name: Checkout code
-uses: actions/checkout@v2
+  - name: Checkout code
+    uses: actions/checkout@v2
 
-- name: Set up .NET
-uses: actions/setup-dotnet@v1
-with:
-dotnet-version: 6.x # 根据你的需求选择 .NET 版本
+  - name: Set up .NET
+    uses: actions/setup-dotnet@v1
+    with:
+    dotnet-version: 6.x
 
-- name: Restore NuGet packages
-run: |
-nuget restore
+  - name: Restore NuGet packages
+    run: |
+    nuget restore
 
-- name: Download FBX SDK
-run: |
-wget ${{ env.FBX_SDK }}
-Start-Process -Wait -FilePath .\fbx*.exe -ArgumentList '/S' # 请注意这是 PowerShell 语法
+  - name: Download FBX SDK
+    run: |
+    wget ${{ env.FBX_SDK }}
+    ./fbx*.exe /S # 这里使用 Linux 样式的命令，根据你的需求调整
 
-- name: Build and Publish
-run: |
-msbuild -m -t:AssetStudioGUI:publish -t:AssetStudioCLI:publish -r -p:Configuration=Release -v:minimal AssetStudio.sln
+  - name: Build and Publish
+    run: |
+    msbuild -m -t:AssetStudioGUI:publish -t:AssetStudioCLI:publish -r -p:Configuration=Release -v:minimal AssetStudio.sln
 
-- name: Create Artifact
-run: |
-$env:TIME_STRING=(Get-Date -UFormat "%Y%m%d%H%M%S%a").ToString()
-7z a -y -mx9 $env:File_NAME-$env:TIME_STRING.$env:File_Format $env:APPVEYOR_BUILD_FOLDER\AssetStudioGUI\bin\Release\net6.0-windows\publish\
+  - name: Create Artifact
+    run: |
+    TIME_STRING=$(date -u +"%Y%m%d%H%M%S%a")
+    7z a -y -mx9 ${{ env.File_NAME }}-$TIME_STRING.${{ env.File_Format }} ${{ env.APPVEYOR_BUILD_FOLDER }}/AssetStudioGUI/bin/Release/net6.0-windows/publish/
 
-- name: Upload Artifact
-uses: actions/upload-artifact@v2
-with:
-name: ${{ env.File_NAME }}-${{ env.TIME_STRING }}.${{ env.File_Format }}
-path: ./${{ env.File_NAME }}-${{ env.TIME_STRING }}.${{ env.File_Format }}
-
-# 如果你需要将构建产物上传到 GitHub Release 或其他位置，可以自行添加相应步骤
+  - name: Upload Artifact
+    uses: actions/upload-artifact@v2
+    with:
+    name: ${{ env.File_NAME }}-$TIME_STRING.${{ env.File_Format }}
+    path: ./${{ env.File_NAME }}-$TIME_STRING.${{ env.File_Format }}
