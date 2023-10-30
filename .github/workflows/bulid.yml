@@ -17,6 +17,10 @@ jobs:
       with:
         fetch-depth: 1
 
+    # 添加下面这一步来设置 msbuild
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2
+
     - name: Cache dependencies
       uses: actions/cache@v2
       with:
